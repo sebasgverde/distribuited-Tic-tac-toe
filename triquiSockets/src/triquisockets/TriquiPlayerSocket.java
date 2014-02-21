@@ -100,12 +100,5 @@ public class TriquiPlayerSocket {
             input = keyboard();
         }
     }
-        
-    //public static void main(String[] args) {
-    public static void mainJugador(String[] args) {
-        //TriquiPlayerSocket t = new TriquiPlayerSocket(args[0], Integer.parseInt(args[1]));
-        TriquiPlayerSocket t = new TriquiPlayerSocket("localhost", 5555);
-        t.run();
-    }
     
 }
