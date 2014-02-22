@@ -36,31 +36,46 @@ public class TriquiPlayerSocket {
     private void play() {
         triqui.send("START,");
         String winner = "N";
+        String jugadorCliente = "O";
         int contplay = 0;
         boolean valid = false;
         String player = null;
         String board = null;
 
-        while (winner.equals("N") && contplay < 9) {
+        //maximo iria hasta 5 por ser el que inicia
+        while (winner.equals("N") && contplay < 5) {
             
 
-            
-            triqui.send("PLAYER,");
-            player = triqui.recv();
-            
-            
-            
-            
-            
-            triqui.send("BOARD,");
-            board = triqui.recv();
-            
-            
-            
+            /*do
+            {*/
+                triqui.send("PLAYER,");
+                player = triqui.recv();
 
-            System.out.println("\nTURNO: " + player);
-            System.out.println(board);
-            do {
+
+
+
+
+                triqui.send("BOARD,");
+                board = triqui.recv();
+
+
+
+
+                System.out.println("\nTURNO: " + player);
+                System.out.println(board);
+                
+                /*try {
+                    Thread.sleep(1000);
+                    System.out.println("vamos de nuevo");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    // handle the exception...        
+                    // For example consider calling Thread.currentThread().interrupt(); here.
+                }
+            }while(!player.equals(jugadorCliente));*/
+            
+            do 
+            {
                 System.out.print("Posicion = ");
                 String pos = keyboard();
 
@@ -79,6 +94,7 @@ public class TriquiPlayerSocket {
                 if (!valid)
                     System.out.println(">>> Jugada invalida");
             } while (!valid);
+            
             triqui.send("TESTWINNER,");
             winner = triqui.recv();
             contplay++;

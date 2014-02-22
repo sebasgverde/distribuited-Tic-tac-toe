@@ -8,17 +8,17 @@ import java.net.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TriquiServer {
+public class Principal {
 
     ServerSocket ss = null;
     Socket c = null;
     int port = 0;
 
-    public TriquiServer() {
+    public Principal() {
         init(5555);
     }
 
-    public TriquiServer(int port) {
+    public Principal(int port) {
         init(port);
     }
 
@@ -27,7 +27,7 @@ public class TriquiServer {
             this.port = port;
             ss = new ServerSocket(port);
         } catch (IOException ex) {
-            Logger.getLogger(TriquiServer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -62,7 +62,7 @@ public class TriquiServer {
 
     public static void main(String[] args) {
     //public void mainServidor(String[] args) {
-        TriquiServer ts = null;
+        Principal ts = null;
         TriquiPlayerSocket t = null;
         
                         int caso = Integer.parseInt(keyboard());
@@ -70,10 +70,10 @@ public class TriquiServer {
                 {
                     if (args.length < 1)
                     {
-                        ts = new TriquiServer();
+                        ts = new Principal();
                     }
                     else
-                        ts = new TriquiServer(Integer.parseInt(args[0]));
+                        ts = new Principal(Integer.parseInt(args[0]));
                     ts.run();
                 }
                 else
