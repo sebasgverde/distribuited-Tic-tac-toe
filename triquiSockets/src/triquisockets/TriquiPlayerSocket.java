@@ -64,16 +64,6 @@ public class TriquiPlayerSocket {
                 System.out.println("\nTURNO: " + player);
                 System.out.println(board);
                 
-                /*try {
-                    Thread.sleep(1000);
-                    System.out.println("vamos de nuevo");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    // handle the exception...        
-                    // For example consider calling Thread.currentThread().interrupt(); here.
-                }
-            }while(!player.equals(jugadorCliente));*/
-            
             do 
             {
                 System.out.print("Posicion = ");
@@ -98,6 +88,19 @@ public class TriquiPlayerSocket {
             triqui.send("TESTWINNER,");
             winner = triqui.recv();
             contplay++;
+            
+            triqui.send("PLAYER,");
+            player = triqui.recv();
+            triqui.send("BOARD,");
+            board = triqui.recv();
+            System.out.println("\nTURNO: " + player);
+            System.out.println(board);
+            
+            triqui.send("CEDERTURNO,");
+            
+            triqui.send("TESTWINNER,");
+            System.out.println("Esperando que el otro jugador haga la jugada");
+            winner = triqui.recv();
         }
         
         triqui.send("BOARD,");
@@ -105,6 +108,7 @@ public class TriquiPlayerSocket {
         
         System.out.println(board);
         System.out.println("Ganador: " + winner);
+        triqui.send("CEDERTURNO,");
 
     }
     

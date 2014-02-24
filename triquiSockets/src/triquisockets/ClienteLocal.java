@@ -18,12 +18,20 @@ import java.util.logging.Logger;
 public class ClienteLocal {
     
     TriquiSocketServer triqui;
-          public String player = null;
-        public String board = null;
+    public String player = null;
+    public String board = null;
+    public String winner = "N";
+    public int contplay = 0;
     
     public ClienteLocal(TriquiSocketServer tr) {
         triqui = tr;
     }
+    
+    public void aumentarContPlay()
+    {
+        contplay++;
+    }
+
     
     private String keyboard() {
         String cadena = null;
@@ -37,6 +45,11 @@ public class ClienteLocal {
         return cadena;
     }
    
+    public void imprimirCosas()
+    {
+        System.out.println("\nTURNO: " + player);
+        System.out.println(board);
+    }
     
     public String leerJugada()
     {

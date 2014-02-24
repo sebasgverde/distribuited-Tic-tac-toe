@@ -48,12 +48,19 @@ public class TriquiSocketServer extends Thread{
           while (!cmd.equals("QUIT")) {
             if (cmd.equals("START")) {
                 triqui.Start();
+                
+                clienteLoc.contplay = 0;
+                
+                clienteLoc.player = triqui.Player();
+                clienteLoc.board = triqui.Board();
+
+                clienteLoc.imprimirCosas();
+            
             } else if (cmd.equals("PLAY")) {
                 int pos = Integer.parseInt(command[1])-1;
                 boolean res = triqui.Play(pos);
                 response = Boolean.toString(res);
                 sendResponse(response);
-                            atenderLocal();
             } else if (cmd.equals("PLAYER")) {
                 response = triqui.Player();
                 sendResponse(response);
@@ -64,26 +71,58 @@ public class TriquiSocketServer extends Thread{
                 response = triqui.TestWinner();
                 sendResponse(response);
             }
+            else if(cmd.equals("CEDERTURNO"))
+            {
+                atenderLocal();
+            }
 
             cmd = recvRequest();
-            System.out.println("Comando: "+cmd);
+           // System.out.println("Comando: "+cmd);
             
         }
     }
     
     public void atenderLocal()
     {
-        boolean valid;
+        clienteLoc.winner = triqui.TestWinner();
+        String winner = clienteLoc.winner;
+        int contplay = clienteLoc.contplay;
         
-        clienteLoc.player = triqui.Player();
-        clienteLoc.board = triqui.Board();
-        do
+        if (winner.equals("N") && contplay < 4) 
         {
-        int pos = Integer.parseInt(clienteLoc.leerJugada());
-        valid = triqui.Play(pos-1);
-            if (!valid)
-               System.out.println(">>> Jugada invalida");
-        } while (!valid);
+            boolean valid;
+
+            clienteLoc.player = triqui.Player();
+            clienteLoc.board = triqui.Board();
+                             
+            //clienteLoc.imprimirCosas();
+            do
+            {
+        
+                            
+            int pos = Integer.parseInt(clienteLoc.leerJugada());
+            valid = triqui.Play(pos-1);
+                if (!valid)
+                   System.out.println(">>> Jugada invalida");
+            } while (!valid);
+            
+            clienteLoc.winner = triqui.TestWinner();
+            
+            clienteLoc.aumentarContPlay();
+            
+            clienteLoc.player = triqui.Player();
+            clienteLoc.board = triqui.Board();
+            clienteLoc.imprimirCosas();
+            
+            System.out.println("Esperando que el otro jugador haga la jugada");
+           // contplay++;
+        }
+        else
+        {
+            clienteLoc.board = triqui.Board();
+            System.out.println(clienteLoc.board);
+            System.out.println("Ganador: " + winner);
+        }
     }
 
     private String recvRequest() {
