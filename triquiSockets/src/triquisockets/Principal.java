@@ -65,24 +65,21 @@ public class Principal {
         Principal ts = null;
         TriquiPlayerSocket t = null;
         
-                        int caso = Integer.parseInt(keyboard());
-                if(caso == 1)
-                {
-                    if (args.length < 1)
-                    {
-                        ts = new Principal();
-                    }
-                    else
-                        ts = new Principal(Integer.parseInt(args[0]));
-                    ts.run();
-                }
-                else
-                {
-                    t = new TriquiPlayerSocket("localhost", 5555);
-                    t.run();
-                          
-                }
-                
-
+        int caso = Integer.parseInt(keyboard());
+        if(caso == 1)
+        {
+            if (args.length < 1)
+            {
+                ts = new Principal();
+            }
+            else
+                ts = new Principal(Integer.parseInt(args[0]));
+            ts.run();
+        }
+        else
+        {
+            t = new TriquiPlayerSocket("localhost", 5555);
+            t.run();                        
+        }
     }
 }
