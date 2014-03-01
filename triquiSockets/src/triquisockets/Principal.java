@@ -5,6 +5,7 @@ import triquisockets.TriquiPlayerSocket;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,7 +82,9 @@ public class Principal {
         }
         else
         {
-            t = new TriquiPlayerSocket("192.168.56.1", 5555);
+            //por ahora asi que ya hoy me da perece hacer el foreach y elegir uno y todo eso
+            String ip = clienServ.listarPeers();
+            t = new TriquiPlayerSocket(ip, 5555);
             t.run();                        
         }
     }

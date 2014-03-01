@@ -8,6 +8,7 @@
 import java.net.Inet4Address;
 import java.rmi.*;
 import java.rmi.registry.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import servidorJugadores.*;
@@ -44,7 +45,19 @@ public class ClienteServidorJugadores {
         } catch (Exception e) {
             return false;
         }
-
+    }
+    
+    public String listarPeers()
+    {
+        //por hoy devolvamos la ip del primero y que se conecte a ese
+        try {
+            ArrayList<Peer> a = servJug.listarPeers();
+            System.out.println(a.get(0).ip);
+            return a.get(0).ip;
+            
+        } catch (Exception e) {
+            return "";
+        }
     }
     
 
