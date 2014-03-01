@@ -65,12 +65,15 @@ public class Principal {
         Principal ts = null;
         TriquiPlayerSocket t = null;
         
+        ClienteServidorJugadores clienServ = new ClienteServidorJugadores();
+        
         int caso = Integer.parseInt(keyboard());
         if(caso == 1)
         {
             if (args.length < 1)
             {
                 ts = new Principal();
+                boolean a = clienServ.agregarPeer("juan", "5555");
             }
             else
                 ts = new Principal(Integer.parseInt(args[0]));
@@ -78,7 +81,7 @@ public class Principal {
         }
         else
         {
-            t = new TriquiPlayerSocket("localhost", 5555);
+            t = new TriquiPlayerSocket("192.168.56.1", 5555);
             t.run();                        
         }
     }

@@ -6,17 +6,28 @@
 
 package servidorJugadores;
 
+import java.io.Serializable;
+
 /**
  *
  * @author sebastian
  */
-public class Peer {
+public class Peer implements Serializable{
 
   public String usuario;
 
   public String ip;
 
   public String puerto;
+  
+  public Peer(String u, String i, String p)
+  {
+      usuario = u;
+      ip = i;
+      puerto = p;
+      
+  }
+  
 
 
 }

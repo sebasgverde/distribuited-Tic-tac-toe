@@ -15,12 +15,12 @@ import java.util.ArrayList;
  */
 public interface IServidorJugadores extends Remote{
 
-  public ArrayList<Peer> listarPeers();
+  public ArrayList<Peer> listarPeers() throws RemoteException;
 
-  public Peer buscarPeer();
+  public Peer buscarPeer() throws RemoteException;
 
-  public boolean agregarPeer();
+  public boolean agregarPeer(Peer p) throws RemoteException;
 
-  public boolean eliminarPeer();
+  public boolean eliminarPeer(Peer p) throws RemoteException;
 
 }
