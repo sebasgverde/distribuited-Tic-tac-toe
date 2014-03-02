@@ -66,26 +66,61 @@ public class Principal {
         Principal ts = null;
         TriquiPlayerSocket t = null;
         
-        ClienteServidorJugadores clienServ = new ClienteServidorJugadores();
+        System.out.println("Ingrese su usuario");
+        String usuario = keyboard();
         
-        int caso = Integer.parseInt(keyboard());
-        if(caso == 1)
+        System.out.println("Conoce una ip?");
+        if(keyboard().equals("y"))
         {
-            if (args.length < 1)
-            {
-                ts = new Principal();
-                boolean a = clienServ.agregarPeer("juan", "5555");
-            }
-            else
-                ts = new Principal(Integer.parseInt(args[0]));
-            ts.run();
+            System.out.println("Ingrese ip");
+            String ip = keyboard();
+            System.out.println("Ingrese puerto");
+            int puerto = Integer.parseInt(keyboard());
+
+            t = new TriquiPlayerSocket(ip, puerto);
+            t.run();   
         }
         else
         {
-            //por ahora asi que ya hoy me da perece hacer el foreach y elegir uno y todo eso
-            String ip = clienServ.listarPeers();
-            t = new TriquiPlayerSocket(ip, 5555);
-            t.run();                        
+            ClienteServidorJugadores clienServ = new ClienteServidorJugadores();
+            clienServ.listarPeers();
+
+            int caso;
+            if(clienServ.hayServidores())
+            {
+                System.out.println("Si desea ser peer servidor ingrese 1");
+                caso = Integer.parseInt(keyboard());
+            }
+            else
+            {
+                System.out.println("Como no hay ningun servidor no puede ser cliente");
+                caso = 1;
+            }
+        
+            if(caso == 1)
+            {
+                System.out.println("Ingrese el puerto por el que va a atender");//normalmente 5555
+                String puerto = keyboard();
+
+                ts = new Principal();
+                boolean a = clienServ.agregarPeer(usuario, puerto);
+
+                ts.run();
+            }
+            else
+            {
+                //por ahora asi que ya hoy me da perece hacer el foreach y elegir uno y todo eso
+                clienServ.listarPeers();
+
+                System.out.println("Ingrese el numero del peer servidor con el que quiere jugar");
+                int numServidor = Integer.parseInt(keyboard());
+
+                String ip = clienServ.getIpServer(numServidor);
+                int puerto = clienServ.getPuertoServer(numServidor);
+
+                t = new TriquiPlayerSocket(ip, puerto);
+                t.run();                        
+            }
         }
     }
 }

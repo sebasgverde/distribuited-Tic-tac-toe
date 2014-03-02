@@ -21,6 +21,7 @@ import sun.security.krb5.internal.PAData;
 public class ClienteServidorJugadores {
     
     IServidorJugadores servJug;
+    ArrayList<Peer> servers;
     
         public ClienteServidorJugadores()
     {
@@ -47,19 +48,34 @@ public class ClienteServidorJugadores {
         }
     }
     
-    public String listarPeers()
+    public boolean hayServidores()
+    {
+        return (servers.size() > 0);
+    }
+    
+    public void listarPeers()
     {
         //por hoy devolvamos la ip del primero y que se conecte a ese
         try {
-            ArrayList<Peer> a = servJug.listarPeers();
-            System.out.println(a.get(0).ip);
-            return a.get(0).ip;
+            servers = servJug.listarPeers();
             
+            for(int i = 0; i < servers.size(); i++)
+            {
+                System.out.println( i + " " + servers.get(i).usuario);
+            }
         } catch (Exception e) {
-            return "";
+            System.out.println("");
         }
     }
     
-
+    public String getIpServer(int ind)
+    {
+        return (servers.get(ind).ip);
+    }
+    
+    public int getPuertoServer(int ind)
+    {
+        return (Integer.parseInt(servers.get(ind).puerto));
+    }
 }
 
