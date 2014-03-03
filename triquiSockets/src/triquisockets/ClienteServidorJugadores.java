@@ -27,7 +27,8 @@ public class ClienteServidorJugadores {
     {
         try {
             //aqui iria el host del servidor
-            servJug=(IServidorJugadores)Naming.lookup("rmi://192.168.0.10/ElServidorJugadores");
+            servJug=(IServidorJugadores)Naming.lookup("rmi://localhost/ElServidorJugadores");           
+            //servJug=(IServidorJugadores)Naming.lookup("rmi://192.168.0.10/ElServidorJugadores");
           //number=Integer.parseInt(args);
 
                 System.out.println();
