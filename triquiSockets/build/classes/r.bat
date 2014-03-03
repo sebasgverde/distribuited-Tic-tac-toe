@@ -1,0 +1,2 @@
+java triquisockets/Principal
+pause

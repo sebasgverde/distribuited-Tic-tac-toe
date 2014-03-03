@@ -1,4 +1,6 @@
 
+package triquisockets;
+
 import java.io.BufferedReader;
 import triquisockets.TriquiPlayerSocket;
 
@@ -102,7 +104,7 @@ public class Principal {
                 System.out.println("Ingrese el puerto por el que va a atender");//normalmente 5555
                 String puerto = keyboard();
 
-                ts = new Principal();
+                ts = new Principal(Integer.parseInt(puerto));
                 boolean a = clienServ.agregarPeer(usuario, puerto);
 
                 ts.run();

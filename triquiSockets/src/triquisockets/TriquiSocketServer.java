@@ -2,8 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import triquisockets.TriquiSocketClient;
+package triquisockets;
+//import triquisockets.TriquiSocketClient;
 import java.io.*;
 import java.net.*;
 import java.util.logging.Level;

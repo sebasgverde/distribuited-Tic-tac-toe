@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package triquisockets;
 
 import java.net.Inet4Address;
 import java.rmi.*;
@@ -26,7 +26,8 @@ public class ClienteServidorJugadores {
         public ClienteServidorJugadores()
     {
         try {
-            servJug=(IServidorJugadores)Naming.lookup("rmi://localhost/ElServidorJugadores");
+            //aqui iria el host del servidor
+            servJug=(IServidorJugadores)Naming.lookup("rmi://192.168.0.10/ElServidorJugadores");
           //number=Integer.parseInt(args);
 
                 System.out.println();
