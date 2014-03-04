@@ -17,7 +17,7 @@ public interface IServidorJugadores extends Remote{
 
   public ArrayList<Peer> listarPeers() throws RemoteException;
 
-  public Peer buscarPeer() throws RemoteException;
+  public Peer buscarPeer(String usuario) throws RemoteException;
 
   public boolean agregarPeer(Peer p) throws RemoteException;
 

@@ -111,8 +111,21 @@ public class Principal {
             }
             else
             {
-                //por ahora asi que ya hoy me da perece hacer el foreach y elegir uno y todo eso
-                clienServ.listarPeers();
+
+                    System.out.println("ingrese busqueda");
+                    String dato = clienServ.buscarServer(keyboard());
+                    if(dato.equals(""))
+                        System.out.println("no se encontro");
+                    else
+                    {
+                        String [] datos = dato.split(",");
+                                        t = new TriquiPlayerSocket(datos[0], Integer.parseInt(datos[1]));
+                t.run();    
+                        
+                    }
+                    
+ 
+                /*clienServ.listarPeers();
 
                 System.out.println("Ingrese el numero del peer servidor con el que quiere jugar");
                 int numServidor = Integer.parseInt(keyboard());
@@ -121,7 +134,7 @@ public class Principal {
                 int puerto = clienServ.getPuertoServer(numServidor);
 
                 t = new TriquiPlayerSocket(ip, puerto);
-                t.run();                        
+                t.run();                        */
             }
         }
     }

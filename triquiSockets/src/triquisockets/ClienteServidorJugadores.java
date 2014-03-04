@@ -28,7 +28,7 @@ public class ClienteServidorJugadores {
         try {
             //aqui iria el host del servidor
             servJug=(IServidorJugadores)Naming.lookup("rmi://localhost/ElServidorJugadores");           
-            //servJug=(IServidorJugadores)Naming.lookup("rmi://192.168.0.10/ElServidorJugadores");
+            //servJug=(IServidorJugadores)Naming.lookup("rmi://sistemas.eafit.edu.co/ElServidorJugadores");
           //number=Integer.parseInt(args);
 
                 System.out.println();
@@ -53,6 +53,19 @@ public class ClienteServidorJugadores {
     public boolean hayServidores()
     {
         return (servers.size() > 0);
+    }
+    
+    public String buscarServer(String user)
+    {
+        try {
+            Peer nuePeer = servJug.buscarPeer(user);
+            if(nuePeer != null)
+                return (nuePeer.ip + "," + nuePeer.puerto);
+            else
+                return "";
+        } catch (Exception e) {
+            return "";
+        }
     }
     
     public void listarPeers()

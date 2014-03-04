@@ -35,8 +35,13 @@ public class ServidorJugadores extends UnicastRemoteObject implements IServidorJ
   return peerServers;
   }
 
-  public Peer buscarPeer() {
-  return null;
+  public Peer buscarPeer(String usuario) {
+    for(int i = 0; i < peerServers.size(); i++)
+    {
+        if(peerServers.get(i).usuario.equals(usuario))
+            return peerServers.get(i);
+    }
+    return null;
   }
 
   public boolean agregarPeer(Peer p) {
