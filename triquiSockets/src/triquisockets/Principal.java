@@ -1,4 +1,3 @@
-
 package triquisockets;
 
 import java.io.BufferedReader;
@@ -71,7 +70,7 @@ public class Principal {
         System.out.println("Ingrese su usuario");
         String usuario = keyboard();
         
-        System.out.println("Conoce una ip?");
+        System.out.println("Desea juagar con una ip y un puerto conocido? (y/n)");
         if(keyboard().equals("y"))
         {
             System.out.println("Ingrese ip");
@@ -111,7 +110,26 @@ public class Principal {
             }
             else
             {
+                System.out.println("Opciones\n"
+                        + "1) Listar servidores disponibles\n"
+                        + "2) Buscar un peer especifico");
+                caso = Integer.parseInt(keyboard());
+                
+                if(caso == 1)
+                {
+                    clienServ.imprimirPeers();
 
+                    System.out.println("Ingrese el numero del peer servidor con el que quiere jugar");
+                    int numServidor = Integer.parseInt(keyboard());
+
+                    String ip = clienServ.getIpServer(numServidor);
+                    int puerto = clienServ.getPuertoServer(numServidor);
+
+                    t = new TriquiPlayerSocket(ip, puerto);
+                    t.run();                      
+                }
+                else if(caso == 2)
+                {
                     System.out.println("ingrese busqueda");
                     String dato = clienServ.buscarServer(keyboard());
                     if(dato.equals(""))
@@ -119,22 +137,13 @@ public class Principal {
                     else
                     {
                         String [] datos = dato.split(",");
-                                        t = new TriquiPlayerSocket(datos[0], Integer.parseInt(datos[1]));
-                t.run();    
+                        t = new TriquiPlayerSocket(datos[0], Integer.parseInt(datos[1]));
+                        t.run();    
                         
-                    }
-                    
- 
-                /*clienServ.listarPeers();
+                    }                    
+                }
 
-                System.out.println("Ingrese el numero del peer servidor con el que quiere jugar");
-                int numServidor = Integer.parseInt(keyboard());
-
-                String ip = clienServ.getIpServer(numServidor);
-                int puerto = clienServ.getPuertoServer(numServidor);
-
-                t = new TriquiPlayerSocket(ip, puerto);
-                t.run();                        */
+                                     
             }
         }
     }

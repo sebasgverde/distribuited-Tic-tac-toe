@@ -5,6 +5,11 @@
  */
 package triquisockets;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Inet4Address;
 import java.rmi.*;
 import java.rmi.registry.*;
@@ -23,11 +28,25 @@ public class ClienteServidorJugadores {
     IServidorJugadores servJug;
     ArrayList<Peer> servers;
     
+        private static String leerHost() {
+            String cadena = null;
+            try
+            {
+                FileInputStream fstream = new FileInputStream("hostRmi.txt");
+                DataInputStream in = new DataInputStream(fstream);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                cadena = br.readLine();
+            } catch (IOException ex) {
+                Logger.getLogger(TriquiPlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return cadena;
+        }
+    
         public ClienteServidorJugadores()
     {
         try {
-            //aqui iria el host del servidor
-            servJug=(IServidorJugadores)Naming.lookup("rmi://localhost/ElServidorJugadores");           
+            //System.out.println("rmi://"+leerHost()+"ElServidorJugadores");
+            servJug=(IServidorJugadores)Naming.lookup("rmi://"+leerHost()+"/ElServidorJugadores");           
             //servJug=(IServidorJugadores)Naming.lookup("rmi://sistemas.eafit.edu.co/ElServidorJugadores");
           //number=Integer.parseInt(args);
 
@@ -70,16 +89,19 @@ public class ClienteServidorJugadores {
     
     public void listarPeers()
     {
-        //por hoy devolvamos la ip del primero y que se conecte a ese
         try {
             servers = servJug.listarPeers();
-            
-            for(int i = 0; i < servers.size(); i++)
-            {
-                System.out.println( i + " " + servers.get(i).usuario);
-            }
         } catch (Exception e) {
-            System.out.println("");
+        }
+
+    }
+    
+    public void imprimirPeers()
+    {          
+        listarPeers();
+        for(int i = 0; i < servers.size(); i++)
+        {
+            System.out.println( i + " " + servers.get(i).usuario);
         }
     }
     
