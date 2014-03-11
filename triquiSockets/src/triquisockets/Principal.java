@@ -110,40 +110,40 @@ public class Principal {
             }
             else
             {
-                System.out.println("Opciones\n"
-                        + "1) Listar servidores disponibles\n"
-                        + "2) Buscar un peer especifico");
-                caso = Integer.parseInt(keyboard());
-                
-                if(caso == 1)
-                {
-                    clienServ.imprimirPeers();
+                do{
+                    System.out.println("Opciones\n"
+                            + "1) Listar servidores disponibles\n"
+                            + "2) Buscar un peer especifico\n"
+                            + "3) Salir");
+                    caso = Integer.parseInt(keyboard());
 
-                    System.out.println("Ingrese el numero del peer servidor con el que quiere jugar");
-                    int numServidor = Integer.parseInt(keyboard());
-
-                    String ip = clienServ.getIpServer(numServidor);
-                    int puerto = clienServ.getPuertoServer(numServidor);
-
-                    t = new TriquiPlayerSocket(ip, puerto);
-                    t.run();                      
-                }
-                else if(caso == 2)
-                {
-                    System.out.println("ingrese busqueda");
-                    String dato = clienServ.buscarServer(keyboard());
-                    if(dato.equals(""))
-                        System.out.println("no se encontro");
-                    else
+                    if(caso == 1)
                     {
-                        String [] datos = dato.split(",");
-                        t = new TriquiPlayerSocket(datos[0], Integer.parseInt(datos[1]));
-                        t.run();    
-                        
-                    }                    
-                }
+                        clienServ.imprimirPeers();
 
-                                     
+                        System.out.println("Ingrese el numero del peer servidor con el que quiere jugar");
+                        int numServidor = Integer.parseInt(keyboard());
+
+                        String ip = clienServ.getIpServer(numServidor);
+                        int puerto = clienServ.getPuertoServer(numServidor);
+
+                        t = new TriquiPlayerSocket(ip, puerto);
+                        t.run();                      
+                    }
+                    else if(caso == 2)
+                    {
+                        System.out.println("ingrese busqueda");
+                        String dato = clienServ.buscarServer(keyboard());
+                        if(dato.equals(""))
+                            System.out.println("no se encontro");
+                        else
+                        {
+                            String [] datos = dato.split(",");
+                            t = new TriquiPlayerSocket(datos[0], Integer.parseInt(datos[1]));
+                            t.run();              
+                        }                    
+                    }    
+                }while(caso != 3);
             }
         }
     }
