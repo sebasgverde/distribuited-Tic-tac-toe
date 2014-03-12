@@ -73,13 +73,23 @@ public class Principal {
         System.out.println("Desea juagar con una ip y un puerto conocido? (y/n)");
         if(keyboard().equals("y"))
         {
-            System.out.println("Ingrese ip");
-            String ip = keyboard();
-            System.out.println("Ingrese puerto");
-            int puerto = Integer.parseInt(keyboard());
+            System.out.println("Si desea ser peer servidor ingrese 1");
+            if(Integer.parseInt(keyboard()) == 1)
+            {
+                System.out.println("Ingrese el puerto por el que va a atender");//normalmente 5555
+                ts = new Principal(Integer.parseInt(keyboard()));
+                ts.run();               
+            }
+            else
+            {
+               System.out.println("Ingrese ip");
+                String ip = keyboard();
+                System.out.println("Ingrese puerto");
+                int puerto = Integer.parseInt(keyboard());
 
-            t = new TriquiPlayerSocket(ip, puerto);
-            t.run();   
+                t = new TriquiPlayerSocket(ip, puerto);
+                t.run();   
+             }
         }
         else
         {
