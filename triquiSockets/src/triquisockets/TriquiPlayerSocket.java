@@ -119,6 +119,7 @@ public class TriquiPlayerSocket {
             System.out.print("Continuar? (y/n) = ");
             input = keyboard();
         }
+        triqui.send("QUIT,");
     }
     
 }

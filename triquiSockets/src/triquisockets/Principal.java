@@ -129,6 +129,7 @@ public class Principal {
 
                     if(caso == 1)
                     {
+                        clienServ.listarPeers();
                         clienServ.imprimirPeers();
 
                         System.out.println("Ingrese el numero del peer servidor con el que quiere jugar");
